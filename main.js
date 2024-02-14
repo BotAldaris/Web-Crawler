@@ -1,5 +1,14 @@
-const { normalizeURL,getURLsFromHTML } = require('./crawl.js')
-const inputURL = 'https://blog.boot.dev'
-  const inputBody = '<html><body><a href="/path/one"><span>Boot.dev></span></a></body></html>'
-//   const actual = getURLsFromHTML(inputBody, inputURL)
-console.log(normalizeURL(inputURL))
+const { argv } = require("node:process");
+const { crawlPage } = require("./crawl.js");
+async function main() {
+  if (argv.length != 3) {
+    console.log(argv.length);
+    console.error(
+      "The program only accept one argument and it needs to be one"
+    );
+  }
+  const baseURL = argv[2];
+  console.log(await crawlPage(baseURL, baseURL, {}));
+}
+
+main();
